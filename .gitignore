@@ -1,0 +1,22 @@
+# C++ Compiled Files
+*.o
+*.out
+*.exe
+main
+
+# VS Code Settings (optional, but recommended to share only critical settings)
+.vscode/
+
+# Arduino Build Output
+output/
+build/
+*.hex
+*.elf
+*.bin
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+
+# Arduino Sketch Specific
+sketch_jan28a/
