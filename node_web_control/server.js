@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const { SerialPort } = require('serialport');
 const { ReadlineParser } = require('@serialport/parser-readline');
@@ -8,7 +9,7 @@ const PORT = 3000;
 
 // ===== SERIAL CONFIGURATION =====
 // Matches your C++ constants
-const SERIAL_PORT = '/dev/ttyACM0'; 
+const SERIAL_PORT = process.env.SERIAL_PORT; 
 const BAUD_RATE = 9600;
 
 let port;

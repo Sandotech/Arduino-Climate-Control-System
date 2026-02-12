@@ -22,3 +22,7 @@ Thumbs.db
 sketch_jan28a/
 
 node_modules/
+
+.env
+
+package-lock.json

@@ -16,6 +16,7 @@ const int buzzerPin = 9;
 bool monitoringActive = true;
 bool fanActive = false;
 bool alertActive = false;
+bool highTempTriggered = false; // Nueva variable para controlar disparo único
 
 // ===== TIMING (MILLIS) =====
 unsigned long previousMillis = 0;
@@ -94,20 +95,30 @@ void readAndSendData()
     return;
   }
 
+  // Definir Umbrales
+  float umbralAlto = 30.0;  // Temperatura para ACTIVAR
+  float umbralReset = 28.0; // Temperatura para RESETEAR (Histéresis)
+
   // ===== CONTROL AUTOMÁTICO DE SEGURIDAD =====
-  // Si la temperatura supera los 30°C, forzar encendido de ventilador y alarma
-  if (t >= 30.0)
+  if (t >= umbralAlto)
   {
-    if (!fanActive)
+    // Solo activamos si NO hemos disparado ya la alerta en este ciclo
+    if (!highTempTriggered)
     {
+      highTempTriggered = true;
+
       fanActive = true;
       digitalWrite(fanPin, HIGH);
-    }
-    if (!alertActive)
-    {
+
       alertActive = true;
       digitalWrite(buzzerPin, HIGH);
     }
+  }
+  // Solo reseteamos el trigger si la temperatura baja MUCHO (debajo del umbral de reset)
+  // Esto evita que pequeñas oscilaciones (29.9 -> 30.0) reactiven la alarma apagada
+  else if (t < umbralReset)
+  {
+    highTempTriggered = false;
   }
 
   // Actualizar LCD Local
