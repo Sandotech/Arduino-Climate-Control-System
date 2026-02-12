@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control Arduino</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+    <h2>Centro de Control</h2>
+    
+    <div class="sensor-grid">
+        <div class="sensor-card">
+            <div class="sensor-val" id="temp">--</div>
+            <div class="sensor-label">Temp (°C)</div>
+        </div>
+        <div class="sensor-card">
+            <div class="sensor-val" id="hum">--</div>
+            <div class="sensor-label">Humedad (%)</div>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-monitor" onclick="send('M')">🔌 Alternar Monitoreo</button>
+        <button class="btn-fan" onclick="send('V')">❄️ Alternar Ventilador</button>
+        <button class="btn-alarm" onclick="send('A')">🚨 Alternar Alarma</button>
+    </div>
+
+    <div class="status" id="status">Sistema Listo</div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
